@@ -71,8 +71,8 @@ static Key keys[] = {
 	{ MODKEY,          		 		XK_Return, spawn,          {.v = termcmd } },
 	{ MODKEY,          		 		XK_i,	   spawn,          {.v = browsercmd } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
-	{ ControlMask,                  XK_q,      focusstack,     {.i = +1 } },
-	{ ControlMask,                  XK_e,      focusstack,     {.i = -1 } },
+	{ MODKEY,                 		XK_Right,      focusstack,     {.i = +1 } },
+	{ MODKEY,                  		XK_Left,      focusstack,     {.i = -1 } },
 	{ MODKEY,                       XK_v,      incnmaster,     {.i = +1 } },
 	{ MODKEY,                       XK_d,      incnmaster,     {.i = -1 } },
 	{ MODKEY,                       XK_h,      setmfact,       {.f = -0.05} },
@@ -124,12 +124,9 @@ static Button buttons[] = {
 	{ ClkTagBar,            MODKEY,         Button3,        toggletag,      {0} },
 };
 
-static char* unclutter[] = {"unclutter", "--timeout", "2", NULL};
-static char* multiscreen[] = {"xrandr", "--output", "HDMI-0", "--auto", "--left-of", "LVDS", NULL};
-
 /* Auto start */
 static const Arg startup[] = {
-	{.v = multiscreen},
-	{.v = unclutter},
+	SHCMD("xrandr --output HDMI-0 --auto --left-of LVDS"),
+	SHCMD("unclutter --timeout 2"),
 };
 
